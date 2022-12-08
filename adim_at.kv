@@ -1,0 +1,17 @@
+MDScreen:
+    name: "adim_at"
+    MDFloatLayout:
+        md_bg_color: 1, 1, 1, 1
+        MDIconButton:
+            icon: "chevron-left"
+            user_font_size: "40sp"
+            pos_hint: {"center_x:": .05, "center_y": .95}
+            theme_text_color: "Custom"
+            text_color: 1, 170/255, 23/255, 1
+            on_release:
+                root.manager.transition.direction = "right"
+                root.manager.current = "AnaEkran"
+        MDLabel:
+            text: "Anı Yaşa :)"
+            pos_hint: {"center_x:": .5, "center_y": .64}
+            halign: "center"

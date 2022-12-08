@@ -1,0 +1,90 @@
+<HadiKart>:
+    elevation: 10
+    md_bg_color: 1, .9, .8, 1
+    radius: [8]
+    MDFloatLayout:
+        id: bar
+        size_hint: .05, .9
+        pos_hint: {"center_x": .02, "center_y": .5}
+        md_bg_color: 1, 170/255, 23/255, 1
+    MDCheckbox:
+        size_hint: None, None
+        size: "48dp", "48dp"
+        unselected_color: 1, 170/255, 23/255, 1
+        selected_color: 0, 179/255, 0, 1
+        pos_hint: {"center_x": .95, "center_y": .8}
+        on_active: app.on_complete(*args, isim, aciklama, bar)
+    MDLabel:
+        id: isim
+        text: root.isim
+        font_name: "Poppins-Regular.ttf"
+        markup: True
+        size_hint_x: .9
+        line_height: .8
+        pos_hint: {"center_x": .51, "center_y": .6}
+    MDLabel:
+        id: aciklama
+        text: root.aciklama
+        font_name: "Poppins-Regular.ttf"
+        markup: True
+        size_hint_x: .7
+        line_height: .6
+        pos_hint: {"center_x": .51, "center_y": .3}
+
+
+
+MDScreen:
+    id: hadilerim
+    hadi_listesi: hadi_listesi
+    name: "Hadilerim"
+    MDFloatLayout:
+        md_bg_color: (250/255, 240/255, 230/255, 1)
+        MDIconButton:
+            icon: "chevron-left"
+            user_font_size: "40sp"
+            pos_hint: {"center_y": .95}
+            theme_text_color: "Custom"
+            text_color: 1, 170/255, 23/255, 1
+            on_release:
+                root.manager.transition.direction = "right"
+                root.manager.current = "AnaEkran"
+        MDLabel:
+            text: "Hadilerim"
+            pos_hint: {"center_x": .4, "center_y": .92}
+            font_name: "Poppins-SemiBold.ttf"
+            font_size: "36sp"
+            halign: "center"
+        MDIconButton:
+            icon: "plus"
+            pos_hint: {"center_x": .76, "center_y": .92}
+            user_font_size: "32sp"
+            md_bg_color: 1, 170/255, 23/255, 1
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "Hadi_Ekle"
+        MDIconButton:
+            icon: "foot-print"
+            pos_hint: {"center_x": .9, "center_y": .92}
+            user_font_size: "32sp"
+            md_bg_color: 1, 170/255, 23/255, 1
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "adim_at"
+        ScrollView:
+            do_scroll_y: True
+            do_scroll_x: False
+            size_hint_y: .72
+            pos_hint: {"center_x": .5, "center_y": .5}
+            bar_width: 0
+            GridLayout:
+                id: hadi_listesi
+                cols: 1
+                height: self.minimum_height
+                row_default_height: 80
+                size_hint_y: None
+                padding: 15, 10
+                spacing: 15, 10

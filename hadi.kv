@@ -1,0 +1,87 @@
+MDScreen:
+    name: "AnaEkran"
+    id: ana_ekran
+    md_bg_color: 255/255, 253/255, 222/255, 1
+    Image:
+        source: "chatbot.jpg"
+        size_hint: .72, .5
+        pos_hint:  {"center_x": .5, "center_y": .75}
+    MDLabel:
+        id: an
+        text: "Şu an: "
+        font_name: "Poppins-SemiBold.ttf"
+        font_size: "20sp"
+        pos_hint:  {"center_x": .5, "center_y": .96}
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 53/255, 56/255, 60/255, 1
+    MDLabel:
+        text: "Ne yapmak istersin?"
+        font_name: "Poppins-Regular.ttf"
+        font_size: "36sp"
+        pos_hint:  {"center_x": .5, "center_y": .53}
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 53/255, 56/255, 60/255, 1
+    MDFillRoundFlatIconButton:
+        text: "Hadilerim"
+        theme_text_color: "Custom"
+        text_color: 47/255, 36/255, 43/255, 1
+        icon: "railroad-light"
+        md_bg_color: 255/255, 180/255, 128/255, 1
+        pos_hint: {"center_x": .55, "center_y": .44}
+        font_size: "32sp"
+        font_name: "Poppins-Regular.ttf"
+        theme_icon_color: "Custom"
+        icon_color: 255/255, 253/255, 162/255, 1
+        on_release:
+            root.manager.current = "Hadilerim"
+            root.manager.transition.direction = 'left'
+    MDFillRoundFlatIconButton:
+        text: "Ekle"
+        theme_text_color: "Custom"
+        text_color: 47/255, 36/255, 43/255, 1
+        icon: "plus-circle"
+        md_bg_color: 255/255, 211/255, 130/255, 1
+        pos_hint: {"center_x": .36, "center_y": .32}
+        font_size: "26sp"
+        font_name: "Poppins-Regular.ttf"
+        on_release:
+            root.manager.current = "Hadi_Ekle"
+            root.manager.transition.direction = 'left'
+    MDFillRoundFlatIconButton:
+        text: "Adim at"
+        theme_text_color: "Custom"
+        text_color: 47/255, 36/255, 43/255, 1
+        icon: "foot-print"
+        md_bg_color: 195/255, 190/255, 238/255, 1
+        font_size: "30sp"
+        font_name: "Poppins-Regular.ttf"
+        pos_hint: {"center_x": .7, "center_y": .23}
+        on_release:
+            root.manager.transition.direction = 'left'
+            root.manager.current = "adim_at"
+    MDFillRoundFlatIconButton:
+        text: "Tamamla"
+        theme_text_color: "Custom"
+        text_color: 47/255, 36/255, 43/255, 1
+        icon: "checkbox-marked-circle"
+        md_bg_color: 195/255, 240/255, 148/255, 1
+        font_size: "32sp"
+        font_name: "Poppins-Regular.ttf"
+        pos_hint: {"center_x": .52, "center_y": .1}
+        on_release:
+            root.manager.transition.direction = 'left'
+            root.manager.current = "adim_at"
+
+<EkranYöneticisi>:
+    ScreenManager:
+        id: ekran_yoneticisi
+    Screen:
+        name: "AnaEkran"
+        AnaEkran:
+    Screen:
+        name: "Hadi_Ekle"
+        BoxLayoutWithActionBar
+            title: "Hadi Ekle"
+            Hadi_Ekle
