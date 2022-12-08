@@ -8,13 +8,13 @@ from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager
 from kivymd.app import MDApp
-from kivymd.uix.behaviors import FakeRectangularElevationBehavior
+from kivymd.uix.behaviors import CommonElevationBehavior
 from kivymd.uix.floatlayout import MDFloatLayout
 
 Window.size = (480, 800)
 
 
-class HadiKart(FakeRectangularElevationBehavior, MDFloatLayout):
+class HadiKart(CommonElevationBehavior, MDFloatLayout):
     isim = StringProperty()
     aciklama = StringProperty()
 
@@ -95,7 +95,6 @@ class Hadi(MDApp):
 
         veri = {"Hadi_ismi": hadi_ismi, "Hadi_Bilgi": hadi_bilgi, "Eklenen_Zaman": eklenen_zaman, "Durum": yapilma_durumu}
 
-        print(veri)
         self.veriler.child(hadi_ismi).set(veri)
 
 

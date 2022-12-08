@@ -2,10 +2,6 @@ MDScreen:
     name: "AnaEkran"
     id: ana_ekran
     md_bg_color: 255/255, 253/255, 222/255, 1
-    Image:
-        source: "chatbot.jpg"
-        size_hint: .72, .5
-        pos_hint:  {"center_x": .5, "center_y": .75}
     MDLabel:
         id: an
         text: "Şu an: "
@@ -15,6 +11,10 @@ MDScreen:
         halign: "center"
         theme_text_color: "Custom"
         text_color: 53/255, 56/255, 60/255, 1
+    Image:
+        source: "chatbot.jpg"
+        size_hint: .72, .5
+        pos_hint:  {"center_x": .5, "center_y": .75}
     MDLabel:
         text: "Ne yapmak istersin?"
         font_name: "Poppins-Regular.ttf"
@@ -62,7 +62,7 @@ MDScreen:
             root.manager.transition.direction = 'left'
             root.manager.current = "adim_at"
     MDFillRoundFlatIconButton:
-        text: "Tamamla"
+        text: "Tamamladıklarım"
         theme_text_color: "Custom"
         text_color: 47/255, 36/255, 43/255, 1
         icon: "checkbox-marked-circle"

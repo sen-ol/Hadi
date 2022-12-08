@@ -74,6 +74,9 @@ MDScreen:
             color: 1, 1, 1, 1
             on_release:
                 app.hadi_ekle(hadi_girilen_isim.text, hadi_girilen_bilgi.text)
+                app.on_start()
+                root.manager.transition.direction = "right"
+                root.manager.current = "Hadilerim"
             canvas.before:
                 Color:
                     rgb: (1, 170/255, 23/255, 1)
