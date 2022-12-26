@@ -10,6 +10,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivymd.app import MDApp
 from kivymd.uix.behaviors import CommonElevationBehavior
 from kivymd.uix.floatlayout import MDFloatLayout
+from kivymd.uix.pickers import MDTimePicker
 
 Window.size = (480, 800)
 
@@ -17,6 +18,7 @@ Window.size = (480, 800)
 class HadiKart(CommonElevationBehavior, MDFloatLayout):
     isim = StringProperty()
     aciklama = StringProperty()
+    eklenen_tarih = StringProperty()
 
 
 class Hadi(MDApp):
@@ -72,18 +74,21 @@ class Hadi(MDApp):
                     baslangic_hadi_listesi = veri_dict["Hadi_ismi"]
                     ekran_yoneticisi.get_screen("Hadilerim").hadi_listesi.add_widget(
                         HadiKart(isim=veri_dict["Hadi_ismi"],
-                                 aciklama=veri_dict["Hadi_Bilgi"]))
+                                 aciklama=veri_dict["Hadi_Bilgi"],
+                                 eklenen_tarih=veri_dict["Eklenen_Zaman"]))
 
     def on_complete(self, checkbox, value, isim, aciklama, bar):
         if value:
             isim.text = isim = f"[s]{isim.text}[/s]"
             aciklama.text = aciklama = f"[s]{aciklama.text}[/s]"
+            # eklenen_tarih.text = eklenen_tarih = f"[s]{eklenen_tarih.text}[/s]"
             bar.md_bg_color = 0, 179/255, 0, 1
         else:
             remove = ["[s]", "[/s]"]
             for i in remove:
                 isim.text = isim.text.replace(i, "")
                 aciklama.text = aciklama.text.replace(i, "")
+                # eklenen_tarih.text = eklenen_tarih.text.replace(i, "")
                 bar.md_bg_color = 1, 170/255, 23/255, 1
 
 
@@ -96,6 +101,34 @@ class Hadi(MDApp):
         veri = {"Hadi_ismi": hadi_ismi, "Hadi_Bilgi": hadi_bilgi, "Eklenen_Zaman": eklenen_zaman, "Durum": yapilma_durumu}
 
         self.veriler.child(hadi_ismi).set(veri)
+
+        ekran_yoneticisi.get_screen("Hadi_Ekle").hadi_girilen_bilgi.text = ""
+        ekran_yoneticisi.get_screen("Hadi_Ekle").hadi_girilen_isim.text = ""
+
+    def show_time_picker(self):
+        time_dialog = MDTimePicker()
+        time_dialog.bind(time=self.get_time)
+        time_dialog.open()
+
+        MDTimePicker(
+            primary_color="orange",
+            accent_color="green",
+            text_button_color="white",
+        ).open()
+
+    def get_time(self, instance, time):
+        '''
+        The method returns the set time.
+
+        :type instance: <kivymd.uix.picker.MDTimePicker object>
+        :type time: <class 'datetime.time'>
+        '''
+
+        ekran_yoneticisi.get_screen("adim_at").bitis_saati.text = str(time)
+
+        print(time)
+
+        return time
 
 
 Hadi().run()

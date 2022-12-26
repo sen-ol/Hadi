@@ -8,8 +8,9 @@
         pos_hint: {"center_x": .02, "center_y": .5}
         md_bg_color: 1, 170/255, 23/255, 1
     MDCheckbox:
+        id: yapilma_durumu
         size_hint: None, None
-        size: "48dp", "48dp"
+        size: "64dp", "64dp"
         unselected_color: 1, 170/255, 23/255, 1
         selected_color: 0, 179/255, 0, 1
         pos_hint: {"center_x": .95, "center_y": .8}
@@ -17,11 +18,12 @@
     MDLabel:
         id: isim
         text: root.isim
-        font_name: "Poppins-Regular.ttf"
+        font_name: "Poppins-SemiBold.ttf"
+        font_size: "20sp"
         markup: True
         size_hint_x: .9
         line_height: .8
-        pos_hint: {"center_x": .51, "center_y": .6}
+        pos_hint: {"center_x": .51, "center_y": .8}
     MDLabel:
         id: aciklama
         text: root.aciklama
@@ -29,7 +31,15 @@
         markup: True
         size_hint_x: .7
         line_height: .6
-        pos_hint: {"center_x": .51, "center_y": .3}
+        pos_hint: {"x": .06, "center_y": .5}
+    MDLabel:
+        id: tarih
+        text: root.eklenen_tarih
+        font_name: "Poppins-Regular.ttf"
+        markup: True
+        size_hint_x: .7
+        line_height: .6
+        pos_hint: {"center_x": .98, "center_y": .2}
 
 
 
@@ -77,14 +87,14 @@ MDScreen:
         ScrollView:
             do_scroll_y: True
             do_scroll_x: False
-            size_hint_y: .72
-            pos_hint: {"center_x": .5, "center_y": .5}
+            size_hint_y: .84
+            pos_hint: {"center_x": .5, "center_y": .45}
             bar_width: 5
             GridLayout:
                 id: hadi_listesi
                 cols: 1
                 height: self.minimum_height
-                row_default_height: 80
+                row_default_height: 200
                 size_hint_y: None
                 padding: 15, 10
                 spacing: 15, 10
