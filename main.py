@@ -67,11 +67,15 @@ class Hadi(MDApp):
 
         veri_seti = self.veriler.get()
 
+        # sirali_veri = self.veriler.order_by_child().get()
+
+        # print(sirali_veri)
+
         if veri_seti.val() is not None:
             for single_data in veri_seti.each():
                 veri_dict = single_data.val()
                 if veri_dict["Hadi_ismi"] != "":
-                    baslangic_hadi_listesi = veri_dict["Hadi_ismi"]
+                    # baslangic_hadi_listesi = veri_dict["Hadi_ismi"]
                     ekran_yoneticisi.get_screen("Hadilerim").hadi_listesi.add_widget(
                         HadiKart(isim=veri_dict["Hadi_ismi"],
                                  aciklama=veri_dict["Hadi_Bilgi"],
@@ -83,6 +87,13 @@ class Hadi(MDApp):
             aciklama.text = aciklama = f"[s]{aciklama.text}[/s]"
             # eklenen_tarih.text = eklenen_tarih = f"[s]{eklenen_tarih.text}[/s]"
             bar.md_bg_color = 0, 179/255, 0, 1
+
+            ref = self.veriler.child(isim)
+
+            # ref.update({"Durum": "true"})
+
+            print(ref)
+
         else:
             remove = ["[s]", "[/s]"]
             for i in remove:
