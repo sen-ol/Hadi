@@ -7,6 +7,30 @@
         size_hint: .05, .9
         pos_hint: {"center_x": .02, "center_y": .5}
         md_bg_color: 1, 170/255, 23/255, 1
+    Image:
+        id: avatar
+        source: root.avatar
+        size_hint: .18, .64
+        allow_stretch: True
+        keep_ratio: False
+        pos_hint: {"center_x": .15, "center_y": .5}
+    MDLabel:
+        id: isim
+        text: root.isim
+        font_name: "Poppins-SemiBold.ttf"
+        font_size: "20sp"
+        markup: True
+        size_hint_x: .7
+        line_height: .8
+        pos_hint: {"center_x": .62, "center_y": .8}
+    MDLabel:
+        id: aciklama
+        text: root.aciklama
+        font_name: "Poppins-Regular.ttf"
+        markup: True
+        size_hint_x: .7
+        line_height: .6
+        pos_hint: {"x": .3, "center_y": .5}
     MDCheckbox:
         id: yapilma_durumu
         size_hint: None, None
@@ -15,23 +39,6 @@
         selected_color: 0, 179/255, 0, 1
         pos_hint: {"center_x": .95, "center_y": .8}
         on_active: app.on_complete(*args, isim, aciklama, bar)
-    MDLabel:
-        id: isim
-        text: root.isim
-        font_name: "Poppins-SemiBold.ttf"
-        font_size: "20sp"
-        markup: True
-        size_hint_x: .9
-        line_height: .8
-        pos_hint: {"center_x": .51, "center_y": .8}
-    MDLabel:
-        id: aciklama
-        text: root.aciklama
-        font_name: "Poppins-Regular.ttf"
-        markup: True
-        size_hint_x: .7
-        line_height: .6
-        pos_hint: {"x": .06, "center_y": .5}
     MDLabel:
         id: tarih
         text: root.eklenen_tarih
@@ -94,7 +101,7 @@ MDScreen:
                 id: hadi_listesi
                 cols: 1
                 height: self.minimum_height
-                row_default_height: 200
+                row_default_height: 150
                 size_hint_y: None
                 padding: 15, 10
                 spacing: 15, 10

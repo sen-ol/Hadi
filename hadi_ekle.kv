@@ -1,8 +1,19 @@
+<AvatarButonu>:
+    id: avatar
+    source: 'ikonlar/eglence.png'
+    size_hint: None, None
+    pos_hint: {"center_x": .15, "center_y": .5}
+    on_press:
+        app.avatar_secildi(avatar)
+
+
 MDScreen:
     id: hadi_ekle
     name: "Hadi_Ekle"
     hadi_girilen_isim: hadi_girilen_isim
     hadi_girilen_bilgi: hadi_girilen_bilgi
+    avatar_secildi_popup: avatar_secildi_popup
+    avatar_listesi: avatar_listesi
     MDFloatLayout:
         md_bg_color: 1, 1, 1, 1
         MDIconButton:
@@ -66,10 +77,22 @@ MDScreen:
                 padding: 15
                 font_name: "Poppins-SemiBold.ttf"
                 font_size: "18sp"
+        ScrollView:
+            do_scroll_x: True
+            do_scroll_y: False
+            pos_hint: {"center_x": .5, "center_y": .35}
+            size_hint: 1, .12
+            GridLayout:
+                id: avatar_listesi
+                spacing: 10
+                rows: 1
+                size_hint_x: None
+
+
         Button:
             text: "Haydi Ekle"
             size_hint: .45, .08
-            pos_hint: {"center_x": .5, "center_y": .36}
+            pos_hint: {"center_x": .5, "center_y": .16}
             background_color: 0, 0, 0, 0
             font_name: "Poppins-SemiBold.ttf"
             font_size: "18sp"
@@ -86,3 +109,8 @@ MDScreen:
                     size: self.size
                     pos: self.pos
                     radius: [25]
+
+        MDLabel:
+            id: avatar_secildi_popup
+            text: ""
+            pos_hint: {"center_x": .9, "center_y": .08}
