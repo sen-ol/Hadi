@@ -1,0 +1,45 @@
+MDScreen:
+    name: "Giris_Ekrani"
+    MDFloatLayout:
+        MDIconButton:
+            icon: "chevron-left"
+            pos_hint:  {"center_x": .1, "center_y": .94}
+            on_press:
+                root.manager.current = "Hosgeldin"
+                root.manager.transition.direction = 'right'
+        Image:
+            source: "resimler/logo.jpg"
+            pos_hint: {"center_x": .5, "center_y": .82}
+            size_hint: .8, .2
+        MDLabel:
+            text: "Hoşgeldin"
+            font_name: "Poppins-Regular"
+            font_size: "32sp"
+            pos_hint: {"center_y": .70}
+            halign: "center"
+            color: rgba(34, 34, 34, 255)
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint: .9, .15
+            pos_hint: {"center_x": .5, "top": .64}
+            spacing: 10
+            MDTextField:
+                id: giris_email
+                hint_text: "Kullanıcı Adı"
+            MDTextField:
+                id: giris_sifre
+                hint_text: "Şifre"
+                password: True
+        MDBoxLayout:
+            size_hint_x: .2
+            size_hint_y: None
+            height: "40dp"
+            pos_hint: {"right": .9, "top": .26}
+            MDRaisedButton:
+                text: "Giriş"
+                on_release: app.giris_yap(root.ids.giris_email.text, root.ids.giris_sifre.text)
+        MDLabel:
+            id: giris_basarisiz
+            text: ""
+            halign: "center"
+            pos_hint: {"center_x": .5, "center_y": .32}

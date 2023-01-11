@@ -15,7 +15,7 @@ from kivymd.uix.behaviors import CommonElevationBehavior
 from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.pickers import MDTimePicker
 
-Window.size = (480, 800)
+Window.size = (380, 720)
 
 
 class HadiKart(CommonElevationBehavior, MDFloatLayout):
@@ -48,6 +48,7 @@ class Hadi(MDApp):
 
         # veri setini yarat
         self.veriler = firebase.database()
+        self.auth = firebase.auth()
 
     def ekran_degistir(self, ekran_ismi):
         ekran_yoneticisi.current_screen = ekran_ismi
@@ -55,11 +56,14 @@ class Hadi(MDApp):
     def build(self):
         global ekran_yoneticisi
         ekran_yoneticisi = ScreenManager()
-        ekran_yoneticisi.add_widget(Builder.load_file("hadi.kv"))
-        ekran_yoneticisi.add_widget(Builder.load_file("hadilerim.kv"))
-        ekran_yoneticisi.add_widget(Builder.load_file("hadi_ekle.kv"))
-        ekran_yoneticisi.add_widget(Builder.load_file("adim_at.kv"))
-        ekran_yoneticisi.add_widget(Builder.load_file("tamamla.kv"))
+        ekran_yoneticisi.add_widget(Builder.load_file("ekranlar/hosgeldin.kv"))
+        ekran_yoneticisi.add_widget(Builder.load_file("ekranlar/giris.kv"))
+        ekran_yoneticisi.add_widget(Builder.load_file("ekranlar/kayit.kv"))
+        ekran_yoneticisi.add_widget(Builder.load_file("ekranlar/hadi.kv"))
+        ekran_yoneticisi.add_widget(Builder.load_file("ekranlar/hadilerim.kv"))
+        ekran_yoneticisi.add_widget(Builder.load_file("ekranlar/hadi_ekle.kv"))
+        ekran_yoneticisi.add_widget(Builder.load_file("ekranlar/adim_at.kv"))
+        ekran_yoneticisi.add_widget(Builder.load_file("ekranlar/tamamla.kv"))
 
         return ekran_yoneticisi
 
@@ -77,6 +81,8 @@ class Hadi(MDApp):
 
         veri_seti = self.veriler.get()
 
+        print(type(veri_seti))
+
         if veri_seti.val() is not None:
             for single_data in veri_seti.each():
                 veri_dict = single_data.val()
@@ -88,6 +94,8 @@ class Hadi(MDApp):
                                  aciklama=veri_dict["Hadi_Bilgi"],
                                  eklenen_tarih=veri_dict["Eklenen_Zaman"],
                                  avatar=avatar_source))
+                elif veri_dict["Kayit_ismi"] != "":
+                    print(veri_dict["Kayit_ismi"])
 
         folder = 'ikonlar'
         avatar_listesi = os.listdir(folder)
@@ -133,9 +141,7 @@ class Hadi(MDApp):
                 # eklenen_tarih.text = eklenen_tarih.text.replace(i, "")
                 bar.md_bg_color = 1, 170 / 255, 23 / 255, 1
 
-    def hadi_ekle(self, hadi_girilen_isim, hadi_girilen_bilgi):
-        hadi_ismi = hadi_girilen_isim
-        hadi_bilgi = hadi_girilen_bilgi
+    def hadi_ekle(self, hadi_ismi, hadi_bilgi):
         yapilma_durumu = False
         eklenen_zaman = self.tarih
 
@@ -175,6 +181,41 @@ class Hadi(MDApp):
         print(time)
 
         return time
+
+    def kayit_ol(self, kayit_isim, kayit_email, kayit_sifre):
+        self.auth.create_user_with_email_and_password(kayit_email, kayit_sifre)
+
+        veri = {"Kayit_ismi": kayit_isim, "Kayit_Email": kayit_email, "Kayit_Sifre": kayit_sifre}
+
+        self.veriler.child(kayit_isim).set(veri)
+
+        print(veri)
+
+
+
+
+        ekran_yoneticisi.get_screen("Kayit_Ekrani").ids.kayit_isim.text = ""
+        ekran_yoneticisi.get_screen("Kayit_Ekrani").ids.kayit_email.text = ""
+        ekran_yoneticisi.get_screen("Kayit_Ekrani").ids.kayit_sifre.text = ""
+
+        ekran_yoneticisi.current = "Giris_Ekrani"
+
+
+    def giris_yap(self, email, sifre):
+        try:
+            self.auth.sign_in_with_email_and_password(email, sifre)
+
+            ekran_yoneticisi.get_screen("Giris_Ekrani").ids.giris_email.text = ""
+            ekran_yoneticisi.get_screen("Giris_Ekrani").ids.giris_sifre.text = ""
+
+            ekran_yoneticisi.current = "AnaEkran"
+
+            giris_yapan = self.auth.current_user
+            print(giris_yapan)
+
+        except:
+            print("Giriş başarısız!")
+
 
 
 Hadi().run()

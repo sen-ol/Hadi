@@ -1,0 +1,54 @@
+MDScreen:
+    name: "Hosgeldin"
+    MDFloatLayout:
+        Image:
+            source: "resimler/journey.jpg"
+            pos_hint: {"center_x": .5, "center_y": .7}
+            size_hint: 1, .55
+        MDLabel:
+            text: "Hadi"
+            font_name: "Poppins-SemiBold"
+            font_size: "30sp"
+            pos_hint: {"center_y": .38}
+            halign: "center"
+            color: rgba(34, 34, 34, 255)
+        MDLabel:
+            text: "Sadece bir adım daha atarak istediğin her şeyi gerçekleştirebilirsin"
+            font_name: "Poppins-Regular"
+            font_size: "15sp"
+            size_hint_x: .85
+            pos_hint: {"center_x": .5, "center_y": .3}
+            halign: "center"
+            color: rgba(34, 34, 34, 255)
+        Button:
+            text: "Giriş yap"
+            size_hint: .66, .065
+            pos_hint: {"center_x": .5, "center_y": .18}
+            background_color: 0, 0, 0, 0
+            font_name: "Poppins-SemiBold"
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = "Giris_Ekrani"
+            canvas.before:
+                Color:
+                    rgb: rgba(152, 120, 221, 255)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [5]
+        Button:
+            text: "Kayıt ol"
+            size_hint: .66, .065
+            pos_hint: {"center_x": .5, "center_y": .09}
+            background_color: 0, 0, 0, 0
+            font_name: "Poppins-SemiBold"
+            color: rgba(52, 0, 231, 255)
+            on_release:
+                root.manager.current = "Kayit_Ekrani"
+                root.manager.transition.direction = 'left'
+            canvas.before:
+                Color:
+                    rgb: rgba(182, 150, 231, 255)
+                Line:
+                    width: 1.2
+                    rounded_rectangle: self.x, self.y, self.width, self.height, 5, 5, 5, 5, 100

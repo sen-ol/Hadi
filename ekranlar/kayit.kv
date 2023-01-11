@@ -1,0 +1,44 @@
+MDScreen:
+    name: "Kayit_Ekrani"
+    MDFloatLayout:
+        MDIconButton:
+            icon: "chevron-left"
+            pos_hint:  {"center_x": .1, "center_y": .94}
+            on_press:
+                root.manager.current = "Hosgeldin"
+                root.manager.transition.direction = 'right'
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint: .8, .24
+            pos_hint: {"center_x": .5, "top": .8}
+            MDTextField:
+                id: kayit_isim
+                hint_text: "İsim"
+            MDTextField:
+                id: kayit_email
+                hint_text: "Email adresi"
+            MDTextField:
+                id: kayit_sifre
+                hint_text: "Şifre"
+                password: True
+        MDBoxLayout:
+            size_hint_x: .2
+            size_hint_y: None
+            height: "40dp"
+            pos_hint: {"right": .9, "top": .56}
+            MDRaisedButton:
+                text: "Kayıt ol"
+                on_release: app.kayit_ol(root.ids.kayit_isim.text, root.ids.kayit_email.text, root.ids.kayit_sifre.text)
+        MDLabel:
+            text: "Üye misin"
+            pos_hint: {"center_x": .8, "center_y": .44}
+            halign: "center"
+            font_size: "16sp"
+
+        MDRaisedButton:
+            name: "giris_ekran_butonu"
+            text: "Giriş ekranına git"
+            icon: "account"
+            pos_hint: {"center_x": .8, "center_y": .4}
+            size_hint: .32, .036
+            on_press: root.manager.current = "Giris_Ekrani"
